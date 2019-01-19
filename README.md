@@ -6,24 +6,21 @@ Specialization.  The Getting and Cleaning Data course is the third in a series o
 Project Objective
 ======================================
 
-The purpose of this project is to demonstrate your ability to collect, work with, and clean a data set. The goal is to prepare tidy data that can be used for later analysis. You will be graded by your peers on a series of yes/no questions related to the project. You will be required to submit: 1) a tidy data set as described below, 2) a link to a Github repository with your script for performing the analysis, and 3) a code book that describes the variables, the data, and any transformations or work that you performed to clean up the data called CodeBook.md. 
+The purpose of this project is to demonstrate my ability to collect, work with, and clean a data set. The goal is to prepare tidy data that can be used for later analysis. There are four items that are part of the submission on this Github repository:
 
-The dataset includes the following files:
-=========================================
+1.   This README.md describing the project objective
+2.   A tidy data set - callded:  tidydata.csv
+3.   The code the produced the tidydata.cav called: run_analyisis.R
+4.   A codebook that describes the data and various transformations I used in my code to produce the tidydata.csv
 
-- 'README.txt'
+Raw data and Summary
+======================================
 
-- 'features_info.txt': Shows information about the variables used on the feature vector.
+The project is based on data from a wearable computing project.  The a description of the data can be found at the following link:
 
-- 'features.txt': List of all features.
+http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
 
-- 'activity_labels.txt': Links the class labels with their activity name.
+The data itself can be found at this link:
 
-- 'train/X_train.txt': Training set.
-
-- 'train/y_train.txt': Training labels.
-
-- 'test/X_test.txt': Test set.
-
-- 'test/y_test.txt': Test labels.
+https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
 
