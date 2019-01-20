@@ -1,19 +1,11 @@
-## Codebook for Getting and Cleaning Data Course Project
+# Codebook for Getting and Cleaning Data Course Project
 
-### Will need to edit this  -  this is still in DRAFT
 
-Data Set Information:
+### Background information about the experiement and data collection from the UCI Machine Learning Repository:
 
 The experiments have been carried out with a group of 30 volunteers within an age bracket of 19-48 years. Each person performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a smartphone (Samsung Galaxy S II) on the waist. Using its embedded accelerometer and gyroscope, we captured 3-axial linear acceleration and 3-axial angular velocity at a constant rate of 50Hz. The experiments have been video-recorded to label the data manually. The obtained dataset has been randomly partitioned into two sets, where 70% of the volunteers was selected for generating the training data and 30% the test data. 
 
 The sensor signals (accelerometer and gyroscope) were pre-processed by applying noise filters and then sampled in fixed-width sliding windows of 2.56 sec and 50% overlap (128 readings/window). The sensor acceleration signal, which has gravitational and body motion components, was separated using a Butterworth low-pass filter into body acceleration and gravity. The gravitational force is assumed to have only low frequency components, therefore a filter with 0.3 Hz cutoff frequency was used. From each window, a vector of features was obtained by calculating variables from the time and frequency domain.
-
-Check the README.txt file for further details about this dataset. 
-
-A video of the experiment including an example of the 6 recorded activities with one of the participants can be seen in the following link: [Web Link]
-
-An updated version of this dataset can be found at [Web Link]. It includes labels of postural transitions between activities and also the full raw inertial signals instead of the ones pre-processed into windows.
-
 
 Attribute Information:
 
@@ -24,49 +16,28 @@ For each record in the dataset it is provided:
 - Its activity label. 
 - An identifier of the subject who carried out the experiment.
 
+### Data download and preparation:
 
-The dataset includes the following files:
-=========================================
+The run_analysis.R program downloads the zip file on the UCI Machine Leaning website from the following web address:
 
-- 'README.txt'
+https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
 
+The program creates a directory for the zip file if one does not exist and then unzips the dataset.  The dataset contained the following files:
+
+- 'README.txt' - which is summarized above
 - 'features_info.txt': Shows information about the variables used on the feature vector.
-
 - 'features.txt': List of all features.
-
 - 'activity_labels.txt': Links the class labels with their activity name.
-
 - 'train/X_train.txt': Training set.
-
 - 'train/y_train.txt': Training labels.
-
 - 'test/X_test.txt': Test set.
-
 - 'test/y_test.txt': Test labels.
+- 'test/subject_test.txt:  which identifies the subject who performed the activity in the test set
+- 'train/subject_train.txt: which identifies the subject who performed the activity in the training set
 
-The following files are available for the train and test data. Their descriptions are equivalent. 
+In total there were 30 subjects that performed each activity.  There were also folders related to the Inertial signals, but those where not used in this analysis and will not be documented.  If more information is needed, please refer to the README.txt file that is part of the dataset.
 
-- 'train/subject_train.txt': Each row identifies the subject who performed the activity for each window sample. Its range is from 1 to 30. 
-
-- 'train/Inertial Signals/total_acc_x_train.txt': The acceleration signal from the smartphone accelerometer X axis in standard gravity units 'g'. Every row shows a 128 element vector. The same description applies for the 'total_acc_x_train.txt' and 'total_acc_z_train.txt' files for the Y and Z axis. 
-
-- 'train/Inertial Signals/body_acc_x_train.txt': The body acceleration signal obtained by subtracting the gravity from the total acceleration. 
-
-- 'train/Inertial Signals/body_gyro_x_train.txt': The angular velocity vector measured by the gyroscope for each window sample. The units are radians/second. 
-
-
-
-Feature Selection 
-=================
-
-The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. These time domain signals (prefix 't' to denote time) were captured at a constant rate of 50 Hz. Then they were filtered using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to remove noise. Similarly, the acceleration signal was then separated into body and gravity acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth filter with a corner frequency of 0.3 Hz. 
-
-Subsequently, the body linear acceleration and angular velocity were derived in time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ). Also the magnitude of these three-dimensional signals were calculated using the Euclidean norm (tBodyAccMag, tGravityAccMag, tBodyAccJerkMag, tBodyGyroMag, tBodyGyroJerkMag). 
-
-Finally a Fast Fourier Transform (FFT) was applied to some of these signals producing fBodyAcc-XYZ, fBodyAccJerk-XYZ, fBodyGyro-XYZ, fBodyAccJerkMag, fBodyGyroMag, fBodyGyroJerkMag. (Note the 'f' to indicate frequency domain signals). 
-
-These signals were used to estimate variables of the feature vector for each pattern:  
-'-XYZ' is used to denote 3-axial signals in the X, Y and Z directions.
+The combined data contained 561 variables included in the dataset which are described in detail in the README.txt and the features_info.txt on the UCI website.  For the purpose of this exercise, only the variables that contained a mean or standard deviation were selected for the following variables:
 
 tBodyAcc-XYZ
 tGravityAcc-XYZ
@@ -86,32 +57,21 @@ fBodyAccJerkMag
 fBodyGyroMag
 fBodyGyroJerkMag
 
-The set of variables that were estimated from these signals are: 
+The final dataset contained 81 variables, 79 from the mean and standard deviation from the above variables and a subjectID -representing the the subject that performed the activity - and activity - representing one of the six activities the participants executed:  LAYING, SITTING, STANDING, WALKING, WALKING DOWNSTAIRS, and WALKING UPSTAIRS
 
-mean(): Mean value
-std(): Standard deviation
-mad(): Median absolute deviation 
-max(): Largest value in array
-min(): Smallest value in array
-sma(): Signal magnitude area
-energy(): Energy measure. Sum of the squares divided by the number of values. 
-iqr(): Interquartile range 
-entropy(): Signal entropy
-arCoeff(): Autorregresion coefficients with Burg order equal to 4
-correlation(): correlation coefficient between two signals
-maxInds(): index of the frequency component with largest magnitude
-meanFreq(): Weighted average of the frequency components to obtain a mean frequency
-skewness(): skewness of the frequency domain signal 
-kurtosis(): kurtosis of the frequency domain signal 
-bandsEnergy(): Energy of a frequency interval within the 64 bins of the FFT of each window.
-angle(): Angle between to vectors.
+# Code Walk through
 
-Additional vectors obtained by averaging the signals in a signal window sample. These are used on the angle() variable:
+After the zip file is downloaded and unpacked, the data is then read into R and is combined into a single dataset with all 561 variables.  A smaller dataset is then created containing only variables that represent a mean or a standard deviation.  In order to preserve computing resources, data files were deleted once they were no longer needed.  For example, once the test and train datasets were combined into a single dataset, the individual datasets were removed.
 
-gravityMean
-tBodyAccMean
-tBodyAccJerkMean
-tBodyGyroMean
-tBodyGyroJerkMean
+Once the dataset containing the mean and standard deviations was created, the mean values of all the data elements (e.g. the mean and standard deviations for the variables above) was calculated for each activity for each subject.  This outout set contains 180 rows (30 participants times 6 activities) with 81 variables (mean values of elements list above along with activity and subjectID).  Prior to creating the final .csv file, the column names were updated to be more "readable".
 
-The complete list of variables of each feature vector is available in 'features.txt'
+The dataset was output as the tidydata.csv.
+
+Two comments regarding the output file:
+1. The mean values of the standard deviations for each activity lack meaningful statistical interpretation, but were executed to fulfill the assignment.
+2. The data element names provided by the researches in the originial datasets were meaningful and logical to me and I probably would not have changed them if this were my own analysis.  However, I clearly understand the point of the exercise as well as the need to make sure that in all data analytics that variable names are clear and related to the values they contain.
+
+
+Overall, this was an interesting project and I found it very vaulable.
+
+
