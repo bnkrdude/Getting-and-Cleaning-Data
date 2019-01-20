@@ -35,22 +35,20 @@ actlabels <-read.table("./UCI HAR Dataset/activity_labels.txt")
 
 ################ Read in Test Data #########################################
 
-subjecttest <- read.table("./UCI HAR Dataset/test/subject_test.txt")
+subjecttest <- read.table("./UCI HAR Dataset/test/subject_test.txt", col.names = "subjectID")
 xtest <- read.table("./UCI HAR Dataset/test/X_test.txt")
 activitytest<- read.table("./UCI HAR Dataset/test/y_test.txt")
 
 ################ Read in Training Data ####################################
 
-subjecttrain <- read.table("./UCI HAR Dataset/train/subject_train.txt")
+subjecttrain <- read.table("./UCI HAR Dataset/train/subject_train.txt", col.names = "subjectID")
 xtrain <- read.table("./UCI HAR Dataset/train/X_train.txt")
 activitytrain <- read.table("./UCI HAR Dataset/train/y_train.txt")
 
 ############# Put descriptive activity labels on data ###############
 
 colnames(xtest) <-features[,2]   # adds column names to xtest
-colnames(subjecttest) <- "subjectID"  # adds column name to subject
 colnames(xtrain) <-features[,2]   # adds column names to xtrain
-colnames(subjecttrain) <- "subjectID"  # adds column name to subject
 
 ##################  Create Combined Data Frame ####################
 
@@ -76,15 +74,21 @@ rm(alltest,alltrain,xtrain,xtest,subjecttrain,subjecttest,activitytest,activityt
 x <- grep("mean()",names(alldata))
 y <- grep("std()",names(alldata))
 z <- sort(c(x,y))
-rm(x,y)
 
 meanstd <- alldata[c(1,2,z)]
+rm(x,y,z)
 
 #############  Create dataset for the average activity for each subject 
 
 sumoutput <- meanstd %>% group_by(subjectID,activity) %>%
       summarise_all(funs(mean)) %>%
       arrange(subjectID,activity)
+
+############ Make variable names more understandable ######
+
+colnames(sumoutput) <-gsub("Acc","Accelerometer",names(sumoutput))
+colnames(sumoutput) <-gsub("Gyro","Gyroscope",names(sumoutput))
+colnames(sumoutput) <-gsub("Mag","Magnitude",names(sumoutput))
 
 write.csv(sumoutput, "tidydata.csv", row.names = FALSE)
 
