@@ -39,23 +39,7 @@ In total there were 30 subjects that performed each activity.  There were also f
 
 The combined data contained 561 variables included in the dataset which are described in detail in the README.txt and the features_info.txt on the UCI website.  For the purpose of this exercise, only the variables that contained a mean or standard deviation were selected for the following variables:
 
-tBodyAcc-XYZ
-tGravityAcc-XYZ
-tBodyAccJerk-XYZ
-tBodyGyro-XYZ
-tBodyGyroJerk-XYZ
-tBodyAccMag
-tGravityAccMag
-tBodyAccJerkMag
-tBodyGyroMag
-tBodyGyroJerkMag
-fBodyAcc-XYZ
-fBodyAccJerk-XYZ
-fBodyGyro-XYZ
-fBodyAccMag
-fBodyAccJerkMag
-fBodyGyroMag
-fBodyGyroJerkMag
+tBodyAccelerometer-XYZ, tGravityAccelerometer-XYZ, tBodyAccelerometerJerk-XYZ, tBodyGyroscope-XYZ, tBodyGyroscopeJerk-XYZ, tBodyAccelerometerMagnitude, tGravityAccelerometerMagnitude, tBodyAccelerometerJerkMagnitude, tBodyGyroscopeMagnitude, tBodyGyroscopeJerkMagnitude, fBodyAccelerometer-XYZ, fBodyAccelerometerJerk-XYZ, fBodyGyroscope-XYZ, fBodyAccelerometerMagnitude, fBodyAccelerometerJerkMagnitude, fBodyGyroscopeMagnitude, fBodyGyroscopeJerkMagnitude
 
 The final dataset contained 81 variables, 79 from the mean and standard deviation from the above variables and a subjectID -representing the the subject that performed the activity - and activity - representing one of the six activities the participants executed:  LAYING, SITTING, STANDING, WALKING, WALKING DOWNSTAIRS, and WALKING UPSTAIRS
 
